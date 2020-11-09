@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include nextcloud_integration *.css
+recursive-include nextcloud_integration *.csv
+recursive-include nextcloud_integration *.html
+recursive-include nextcloud_integration *.ico
+recursive-include nextcloud_integration *.js
+recursive-include nextcloud_integration *.json
+recursive-include nextcloud_integration *.md
+recursive-include nextcloud_integration *.png
+recursive-include nextcloud_integration *.py
+recursive-include nextcloud_integration *.svg
+recursive-include nextcloud_integration *.txt
+recursive-exclude nextcloud_integration *.pyc
