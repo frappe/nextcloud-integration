@@ -97,7 +97,7 @@
   },
   {
    "default": "0",
-   "description": "Backup public and private files along with the database.",
+   "description": "Backup public and private files along with the database and site config.",
    "fieldname": "backup_files",
    "fieldtype": "Check",
    "label": "Backup Files"
@@ -126,7 +126,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2020-11-17 15:32:53.249218",
+ "modified": "2020-11-17 16:40:37.188599",
  "modified_by": "Administrator",
  "module": "Nextcloud Integration",
  "name": "NextCloud Settings",
