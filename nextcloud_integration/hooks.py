@@ -102,23 +102,23 @@ app_license = "MIT"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
+scheduler_events = {
 # 	"all": [
 # 		"nextcloud_integration.tasks.all"
 # 	],
-# 	"daily": [
-# 		"nextcloud_integration.tasks.daily"
-# 	],
+	"daily": [
+		"nextcloud_integration.nextcloud_integration.doctype.nextcloud_settings.nextcloud_settings.daily_backup"
+	],
 # 	"hourly": [
 # 		"nextcloud_integration.tasks.hourly"
 # 	],
-# 	"weekly": [
-# 		"nextcloud_integration.tasks.weekly"
-# 	]
+	"weekly": [
+		"nextcloud_integration.nextcloud_integration.doctype.nextcloud_settings.nextcloud_settings.weekly_backup"
+	],
 # 	"monthly": [
 # 		"nextcloud_integration.tasks.monthly"
 # 	]
-# }
+}
 
 # Testing
 # -------
