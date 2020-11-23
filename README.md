@@ -35,17 +35,5 @@ Optionally you can also provide a port number after your URL as *("https://examp
 
 After saving the configuration click on **Backup Now** button and verify if the files where uploaded in your *NextCloud* instance. This process generally takes from a few minutes to half an hour depending on the size of your backup.
 
-<!-- ### Development
-
-#### How To Setup
-You can download and install nextcloud-integration app using
-
-```
-bench get-app https://github.com/frappe/nextcloud-integration.git
-bench --site {site_name} install-app nextcloud-integration
-```
-
-Use `bench start` command to run the project. -->
-
 ### License
 This repository has been released under the [MIT License](LICENSE).
