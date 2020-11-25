@@ -33,7 +33,9 @@ Optionally you can also provide a port number after your URL as *("https://examp
 * **Send Notifications To**: Email on which the notification for Backups should be sent.
 * **Send Email for Successful Backup**: Check this option to receive email for successful backups, by default emails for failed backups are sent.
 
-After saving the configuration click on **Backup Now** button and verify if the files where uploaded in your *NextCloud* instance. This process generally takes from a few minutes to half an hour depending on the size of your backup.
+After saving the configuration click on **Backup Now** button and verify if the files where uploaded in your *NextCloud* instance.
+
+**NOTE**: This process generally takes from a few minutes to half an hour depending on the size of your backup.
 
 ### License
 This repository has been released under the [MIT License](LICENSE).
