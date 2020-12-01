@@ -26,8 +26,8 @@ class NextcloudSetting(Document):
 				self.backup_to_nextcloud(upload_db_backup)
 				if self.error_log:
 					raise Exception
-				# if self.send_email_for_successful_backup:
-				# 	send_email(True, "Nextcloud", "Nextcloud Setting", "send_notifications_to")
+				if self.send_email_for_successful_backup:
+					send_email(True, "Nextcloud", "Nextcloud Setting", "send_notifications_to")
 		except JobTimeoutException:
 			if retry_count < 2:
 				args = {
@@ -41,7 +41,7 @@ class NextcloudSetting(Document):
 			else:
 				file_and_error = [" - ".join(f) for f in zip(self.failed_uploads if self.failed_uploads else '', list(set(self.error_log)))]
 				error_message = ("\n".join(file_and_error) + "\n" + frappe.get_traceback())
-			# send_email(False, "Nextcloud", "Nextcloud Setting", "send_notifications_to", error_message)
+			send_email(False, "Nextcloud", "Nextcloud Setting", "send_notifications_to", error_message)
 
 	def backup_to_nextcloud(self, upload_db_backup=True,):
 		if not frappe.db:
