@@ -6,44 +6,42 @@ import frappe
 from frappe.model.document import Document
 from frappe import _
 from frappe.utils.background_jobs import enqueue
-from frappe.utils import cint, get_backups_path
 from frappe.utils.backups import new_backup
-from frappe.integrations.offsite_backup_utils import get_latest_backup_file, send_email, validate_file_size, generate_files_backup
+from frappe.integrations.offsite_backup_utils import send_email, validate_file_size
 
 import requests
 import os
 from rq.timeouts import JobTimeoutException
 from urllib.parse import urlparse
 
-class NextCloudSettings(Document):
-
+class NextcloudSetting(Document):
 	upload_path = None
 	session = None
 	failed_uploads, error_log = [], []
 
-	def take_backup(self, retry_count=0, upload_db_backup=True):
+	def start_taking_backup(self, retry_count=0, upload_db_backup=True):
 		try:
 			if self.enabled:
 				validate_file_size()
 				self.backup_to_nextcloud(upload_db_backup)
 				if self.error_log:
 					raise Exception
-				if self.send_email_for_successful_backup:
-					send_email(True, "NextCloud", "NextCloud Settings", "send_notifications_to")
+				# if self.send_email_for_successful_backup:
+				# 	send_email(True, "Nextcloud", "Nextcloud Setting", "send_notifications_to")
 		except JobTimeoutException:
 			if retry_count < 2:
 				args = {
 					"retry_count": retry_count + 1,
 					"upload_db_backup": False #considering till worker timeout db backup is uploaded
 				}
-				enqueue(self.take_backup, queue='long', timeout=1500, **args)
+				enqueue(self.start_taking_backup, queue='long', timeout=1500, **args)
 		except Exception:
 			if isinstance(self.error_log, str):
 				error_message = self.error_log + "\n" + frappe.get_traceback()
 			else:
 				file_and_error = [" - ".join(f) for f in zip(self.failed_uploads if self.failed_uploads else '', list(set(self.error_log)))]
 				error_message = ("\n".join(file_and_error) + "\n" + frappe.get_traceback())
-			send_email(False, "NextCloud", "NextCloud Settings", "send_notifications_to", error_message)
+			# send_email(False, "Nextcloud", "Nextcloud Setting", "send_notifications_to", error_message)
 
 	def backup_to_nextcloud(self, upload_db_backup=True,):
 		if not frappe.db:
@@ -51,7 +49,7 @@ class NextCloudSettings(Document):
 		if upload_db_backup:
 			base_url = self.make_baseurl()
 			if not base_url:
-				self.error_log.append(_('NextCloud URL incorrect'))
+				self.error_log.append(_('Nextcloud URL incorrect'))
 				return
 			self.make_upload_path(base_url)
 			self.make_session()
@@ -132,7 +130,7 @@ class NextCloudSettings(Document):
 		return base_url
 
 	def check_for_upload_folder(self):
-		'''If a path is provide in NextCloud Setting, this function checks if that path exist.
+		'''If a path is provide in Nextcloud Setting, this function checks if that path exist.
 		If no path is provided, this function will create a folder called "Frappe Backups" for the user.'''
 		response = self.session.request("PROPFIND", self.upload_path, headers={"Depth": "0"}, allow_redirects=False)
 		if response.status_code == 404:
@@ -173,7 +171,7 @@ class NextCloudSettings(Document):
 @frappe.whitelist()
 def take_backup():
 	"""Enqueue longjob for taking backup to nextcloud"""
-	enqueue("nextcloud_integration.nextcloud_integration.doctype.nextcloud_settings.nextcloud_settings.start_backup", queue='long', timeout=1500)
+	enqueue("nextcloud_integration.nextcloud_integration.doctype.nextcloud_setting.nextcloud_setting.start_backup", queue='long', timeout=1500)
 	frappe.msgprint(_("Queued for backup. It may take from a few minutes upto 30 minutes."))
 
 def daily_backup():
@@ -183,9 +181,10 @@ def weekly_backup():
 	take_backups_if("Weekly")
 
 def take_backups_if(freq):
-	if frappe.db.get_single_value("NextCloud Settings", "backup_frequency") == freq:
+	if frappe.db.get_single_value("Nextcloud Setting", "backup_frequency") == freq:
 		start_backup()
 
 def start_backup():
-	backup = frappe.get_doc("NextCloud Settings")
-	backup.take_backup()
+	backup = frappe.get_doc("Nextcloud Setting")
+	backup.start_taking_backup()
+

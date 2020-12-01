@@ -1,6 +1,6 @@
 {
  "actions": [],
- "creation": "2020-09-10 13:23:13.405724",
+ "creation": "2020-12-01 18:35:45.159102",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -10,13 +10,13 @@
   "email",
   "password",
   "path_to_upload_folder",
-  "column_break_4",
+  "column_break_6",
   "nextcloud_url",
   "webdav_url",
   "backup_details_section",
   "backup_frequency",
   "backup_files",
-  "column_break_10",
+  "column_break_12",
   "send_notifications_to",
   "send_email_for_successful_backup"
  ],
@@ -25,7 +25,7 @@
    "default": "0",
    "fieldname": "enabled",
    "fieldtype": "Check",
-   "label": "Enable NextCloud Backup"
+   "label": "Enable Nextcloud Backup"
   },
   {
    "depends_on": "enabled",
@@ -44,7 +44,6 @@
   {
    "fieldname": "password",
    "fieldtype": "Password",
-   "in_list_view": 1,
    "label": "Password",
    "mandatory_depends_on": "enabled",
    "reqd": 1
@@ -57,7 +56,7 @@
    "label": "Path to Upload Folder"
   },
   {
-   "fieldname": "column_break_4",
+   "fieldname": "column_break_6",
    "fieldtype": "Column Break"
   },
   {
@@ -66,7 +65,7 @@
    "fieldname": "nextcloud_url",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "NextCloud URL",
+   "label": "Nextcloud URL",
    "mandatory_depends_on": "enabled",
    "reqd": 1
   },
@@ -103,7 +102,7 @@
    "label": "Backup Files"
   },
   {
-   "fieldname": "column_break_10",
+   "fieldname": "column_break_12",
    "fieldtype": "Column Break"
   },
   {
@@ -126,10 +125,10 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2020-11-17 16:40:37.188599",
+ "modified": "2020-12-01 19:23:01.740808",
  "modified_by": "Administrator",
  "module": "Nextcloud Integration",
- "name": "NextCloud Settings",
+ "name": "Nextcloud Setting",
  "owner": "Administrator",
  "permissions": [
   {

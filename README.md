@@ -10,7 +10,7 @@ On your site you can download and install *nextcloud-integration* app using
 
 ```
 bench get-app https://github.com/frappe/nextcloud-integration.git
-bench --site {site_name} install-app nextcloud-integration
+bench --site {site_name} install-app nextcloud_integration
 ```
 
 ### Configuration
