@@ -19,7 +19,7 @@ After successful installation of *nextcloud-integration* app You can search for 
 
 <kbd><img src=".github/nextcloud_setting_screen.png" alt="NextCloud Setting Screen" /></kbd>
 
-* **Email**: Email address of your *Nextcloud Account*
+* **Username**: Your *Nextcloud Account Username*
 * **Password**: Your *Nextcloud Account password* or *App Password* you might have created for this app.
 * **Nextcloud URL**: URL of site where Nextcloud Account exist. *For eg("https://example.com")*.
 Optionally you can also provide a port number after your URL as *("https://example.com:443")*
