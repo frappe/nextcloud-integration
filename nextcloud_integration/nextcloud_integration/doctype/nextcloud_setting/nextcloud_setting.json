@@ -7,7 +7,7 @@
  "field_order": [
   "enabled",
   "nextcloud_details",
-  "email",
+  "nextcloud_username",
   "password",
   "path_to_upload_folder",
   "column_break_6",
@@ -126,7 +126,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2020-12-04 19:23:01.740808",
+ "modified": "2020-12-07 11:27:37.194002",
  "modified_by": "Administrator",
  "module": "Nextcloud Integration",
  "name": "Nextcloud Setting",
