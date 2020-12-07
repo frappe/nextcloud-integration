@@ -34,10 +34,10 @@
    "label": "Nextcloud Details"
   },
   {
-   "fieldname": "email",
+   "fieldname": "nextcloud_username",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Email",
+   "label": "Nextcloud Username",
    "mandatory_depends_on": "enabled",
    "reqd": 1
   },
@@ -111,6 +111,7 @@
    "in_list_view": 1,
    "label": "Send Notifications To",
    "mandatory_depends_on": "enabled",
+   "options": "Email",
    "reqd": 1
   },
   {
@@ -125,7 +126,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2020-12-01 19:23:01.740808",
+ "modified": "2020-12-04 19:23:01.740808",
  "modified_by": "Administrator",
  "module": "Nextcloud Integration",
  "name": "Nextcloud Setting",
