@@ -13,7 +13,7 @@ frappe.ui.form.on('Nextcloud Setting', {
 	},
 
 	add_backup_button: function(frm) {
-		if (frm.doc.enabled && frm.doc.email && frm.doc.password) {
+		if (frm.doc.enabled && frm.doc.nextcloud_username && frm.doc.password) {
 			frm.add_custom_button(__("Backup Now"), function() {
 				frappe.call({
 					method: "nextcloud_integration.nextcloud_integration.doctype.nextcloud_setting.nextcloud_setting.take_backup",
