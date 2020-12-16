@@ -17,7 +17,7 @@ bench --site {site_name} install-app nextcloud_integration
 
 After successful installation of *nextcloud-integration* app You can search for **Nextcloud Settings** in the **Awesome Bar** which will direct you to the following **Nextcloud Settings** page
 
-<kbd><img src=".github/nextcloud_setting_screen.png" alt="NextCloud Setting Screen" /></kbd>
+<kbd><img src=".github/nextcloud_setting_screen.png" alt="Nextcloud Setting Screen" /></kbd>
 
 * **Username**: Your *Nextcloud Account Username*
 * **Password**: Your *Nextcloud Account password* or *App Password* you might have created for this app.
