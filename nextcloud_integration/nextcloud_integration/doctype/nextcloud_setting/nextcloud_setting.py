@@ -104,7 +104,7 @@ class NextcloudSetting(Document):
 		session = requests.session()
 		session.verify = True
 		session.stream = True
-		session.auth = (self.email, 
+		session.auth = (self.nextcloud_username, 
 		self.get_password(fieldname='password',raise_exception=False))
 		session.headers.update({
 			"OCS-APIRequest": "true",
