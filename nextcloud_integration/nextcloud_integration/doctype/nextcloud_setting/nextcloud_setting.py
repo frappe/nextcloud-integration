@@ -11,6 +11,7 @@ from frappe.integrations.offsite_backup_utils import send_email, validate_file_s
 
 import requests
 import os
+import xml.etree.ElementTree as ET
 from rq.timeouts import JobTimeoutException
 from urllib.parse import urlparse
 
@@ -82,6 +83,8 @@ class NextcloudSetting(Document):
 		# file backup
 		if self.backup_files and db_response != 'Failed' and site_config_response != 'Failed':
 			self.file_upload(public_file_backup, private_file_backup)
+		if db_response != 'Failed' and site_config_response != 'Failed' and self.backup_limit > 0:
+			self.delete_old_backups(self.upload_path)
 
 	def file_upload(self, public_file_backup, private_file_backup):
 		if public_file_backup:
@@ -167,6 +170,37 @@ class NextcloudSetting(Document):
 			return "Failed"
 		else:
 			return "Success"
+		
+	def delete_old_backups(self, url):
+		"""
+		Cleans up the backup_link_path directory by deleting older files
+		"""
+		try:
+			response = self.session.request("PROPFIND", url, allow_redirects=False)
+			vurl = urlparse(self.nextcloud_url)
+			
+			if not vurl.port:
+				port = 443 if vurl.scheme == 'https' else 80
+			base_url = '{0}://{1}:{2}'.format(vurl.scheme, vurl.netloc, vurl.port if vurl.port else port)
+			tree = ET.fromstring(response.content)
+			files = [self.prop(elem, 'href') for elem in tree.findall('{DAV:}response')]
+			del files[0]
+			files.reverse()
+			backups = 0
+			for file in files:
+				if self.backup_files and backups < (self.backup_limit * 4) or not self.backup_files and backups < (self.backup_limit * 2):
+					backups += 1
+				else:
+					print(base_url +  file)
+					self.session.request("DELETE", base_url + file, allow_redirects=False)
+
+		except Exception as e:
+			print(e)
+			return "List Folder Failed"
+
+	def prop(self, elem, name, default=None):
+		child = elem.find('.//{DAV:}' + name)
+		return default if child is None else child.text
 
 @frappe.whitelist()
 def take_backup():

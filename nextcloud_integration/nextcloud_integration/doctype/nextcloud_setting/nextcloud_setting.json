@@ -16,6 +16,7 @@
   "backup_details_section",
   "backup_frequency",
   "backup_files",
+  "backup_limit",
   "column_break_12",
   "send_notifications_to",
   "send_email_for_successful_backup"
@@ -120,13 +121,23 @@
    "fieldname": "send_email_for_successful_backup",
    "fieldtype": "Check",
    "label": "Send Email for Successful Backup"
+  },
+  {
+   "default": "5",
+   "description": "The script use only the count of files, please don't insert other files",
+   "fieldname": "backup_limit",
+   "fieldtype": "Int",
+   "label": "Number of Backups",
+   "length": 1,
+   "options": "5",
+   "reqd": 1
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2021-01-08 17:49:41.790409",
+ "modified": "2021-05-23 19:47:41.230010",
  "modified_by": "Administrator",
  "module": "Nextcloud Integration",
  "name": "Nextcloud Setting",
