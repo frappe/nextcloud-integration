@@ -26,7 +26,7 @@ class NextcloudSetting(Document):
 				validate_file_size()
 				self.backup_to_nextcloud(upload_db_backup)
 				if self.error_log:
-					raise Exception
+					frappe.log_error(self.error_log, 'nextcloud upload failed')
 				if self.send_email_for_successful_backup:
 					send_email(True, "Nextcloud", "Nextcloud Setting", "send_notifications_to")
 		except JobTimeoutException:
@@ -138,11 +138,11 @@ class NextcloudSetting(Document):
 		response = self.session.request("PROPFIND", self.upload_path, headers={"Depth": "0"}, allow_redirects=False)
 		if response.status_code == 404:
 			if self.path_to_upload_folder:
-				frappe.throw(_('Given "Path to upload folder" does not exist'))
+				self.error_log.append(_('Given "Path to upload folder" does not exist'))
 			else:
 				response = self.session.request("MKCOL", self.upload_path, allow_redirects=False)
 				if not response.ok:
-					frappe.throw(_('There was an error. Please try again'))
+					self.error_log.append(_('There was an error. Please try again'))
 
 	def upload_backup(self, filebackup):
 		if not os.path.exists(filebackup):
