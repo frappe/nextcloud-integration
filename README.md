@@ -9,7 +9,7 @@ This app lets you take backup of your database, config and files to your Nextclo
 On your site you can download and install *nextcloud-integration* app using
 
 ```
-bench get-app https://github.com/frappe/nextcloud-integration.git
+bench get-app https://github.com/gluecks-it/nextcloud-integration.git
 bench --site {site_name} install-app nextcloud_integration
 ```
 
